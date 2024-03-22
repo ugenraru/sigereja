@@ -7,6 +7,8 @@
 	<div class="card-body">
 		<div class="table-responsive">
 			<div>
+			<h5>SEMUA DATA LINGKUNGAN YANG TERDAFTAR</h5>
+			<div class="col-md-6 offset-md-10">
 				<a href="?page=add-lingkungan" class="btn btn-primary">
 					<i class="fa fa-edit"></i> Tambah Data</a>
 			</div>

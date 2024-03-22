@@ -7,22 +7,13 @@
     }
 ?>
 
-<div class="card card-success">
+<div class="card card-info">
 	<div class="card-header">
 		<h3 class="card-title">
 			<i class="fa fa-edit"></i> Ubah Data</h3>
 	</div>
 	<form action="" method="post" enctype="multipart/form-data">
 		<div class="card-body">
-
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">No Sistem</label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control" id="id_lingkungan" name="id_lingkungan" value="<?php echo $data_cek['id_lingkungan']; ?>"
-					 readonly/>
-				</div>
-			</div>
-
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nama Lingkungan</label>
 				<div class="col-sm-6">
@@ -131,8 +122,9 @@
 			</div>
 		</div>
 		<div class="card-footer">
-			<input type="submit" name="Ubah" value="Simpan" class="btn btn-success">
-			<a href="?page=data-lingkungan" title="Kembali" class="btn btn-secondary">Batal</a>
+		<div class="col-md-6 offset-md-6">
+			<input type="submit" name="Ubah" value="Simpan" class="btn btn-info">
+			<a href="?page=data-lingkungan" title="Kembali" class="btn btn-danger">Batal</a>
 		</div>
 	</form>
 	</div>
@@ -140,14 +132,14 @@
 <?php
 
     if (isset ($_POST['Ubah'])){
+		$id=$_GET['kode'];
     $sql_ubah = "UPDATE tb_lingkungan SET 
 		nama_lingkungan='".$_POST['nama_lingkungan']."',
 		id_stasi='".$_POST['id_stasi']."',
 		ketua='".$_POST['ketua']."',
 		sekretaris='".$_POST['sekretaris']."',
 		bendahara='".$_POST['bendahara']."',
-		jumlah_kk='".$_POST['jumlah_kk']."'
-		WHERE id_lingkungan='".$_POST['id_lingkungan']."'";
+		jumlah_kk='".$_POST['jumlah_kk']."'  where id_lingkungan='$id'";
     $query_ubah = mysqli_query($koneksi, $sql_ubah);
     mysqli_close($koneksi);
 

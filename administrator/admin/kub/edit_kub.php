@@ -7,7 +7,7 @@
     }
 ?>
 
-<div class="card card-success">
+<div class="card card-info">
 	<div class="card-header">
 		<h3 class="card-title">
 			<i class="fa fa-edit"></i> Ubah Data</h3>
@@ -16,22 +16,14 @@
 		<div class="card-body">
 
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">No Sistem</label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control" id="id_kub" name="id_kub" value="<?php echo $data_cek['id_kub']; ?>"
-					 readonly/>
-				</div>
-			</div>
-
-			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nama KUB</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" id="nama_kub" name="nama_kub" value="<?php echo $data_cek['nama_kub']; ?>"
+					<input type="text" class="form-control" id="nama_kub" 
+					name="nama_kub" value="<?php echo $data_cek['nama_kub']; ?>"
 					/>
 				</div>
 			</div>
-
-		<div class="form-group row">
+			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nama Lingkungan</label>
 				<div class="col-sm-4">
 					<select name="id_lingkungan" id="id_lingkungan" class="form-control select2bs4" required>
@@ -51,7 +43,6 @@
 					</select>
 				</div>
 			</div>
-
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Ketua</label>
 				<div class="col-sm-3">
@@ -74,7 +65,6 @@
 					</select>
 				</div>
 			</div>
-
 				<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Sekretaris</label>
 				<div class="col-sm-3">
@@ -120,36 +110,36 @@
 					</select>
 				</div>
 			</div>
-
-
-
 		<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Jumlah Kepala Keluarga</label>
+				<label class="col-sm-2 col-form-label">Jumlah Keluarga</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" id="jumlah_kk" name="jumlah_kk" value="<?php echo $data_cek['jumlah_kk']; ?>"/>
+					<input type="text" class="form-control" id="jumlah_kk" name="jumlah_kk" 
+					value="<?php echo $data_cek['jumlah_kk']; ?>"/>
 				</div>
 			</div>
 		</div>
 		<div class="card-footer">
-			<input type="submit" name="Ubah" value="Simpan" class="btn btn-success">
-			<a href="?page=data-kub" title="Kembali" class="btn btn-secondary">Batal</a>
+		<div class="col-md-6 offset-md-6">
+			<input type="submit" name="Ubah" value="Simpan" class="btn btn-info">
+			<a href="?page=data-kub" title="Kembali" class="btn btn-danger">Batal</a>
 		</div>
 	</form>
 	</div>
 
 <?php
 
+
     if (isset ($_POST['Ubah'])){
+	$id=$_GET['kode'];
     $sql_ubah = "UPDATE tb_kub SET 
 		nama_kub='".$_POST['nama_kub']."',
 		id_lingkungan='".$_POST['id_lingkungan']."',
 		ketua='".$_POST['ketua']."',
 		sekretaris='".$_POST['sekretaris']."',
 		bendahara='".$_POST['bendahara']."',
-		jumlah_kk='".$_POST['jumlah_kk']."'
-		WHERE id_lingkungan='".$_POST['id_lingkungan']."'";
-    $query_ubah = mysqli_query($koneksi, $sql_ubah);
-    mysqli_close($koneksi);
+		jumlah_kk='".$_POST['jumlah_kk']."' where id_kub='$id'";
+		$query_ubah = mysqli_query($koneksi, $sql_ubah);
+        mysqli_close($koneksi);
 
     if ($query_ubah) {
         echo "<script>

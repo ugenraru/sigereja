@@ -1,4 +1,4 @@
-<div class="card card-primary">
+<div class="card card-info">
 	<div class="card-header">
 		<h3 class="card-title">
 			<i class="fa fa-edit"></i> Tambah Data</h3>
@@ -113,8 +113,9 @@
 
 		</div>
 		<div class="card-footer">
-			<input type="submit" name="Simpan" value="Simpan" class="btn btn-info">
-			<a href="?page=data-kub" title="Kembali" class="btn btn-secondary">Batal</a>
+		<div class="col-md-6 offset-md-5">
+			<input type="submit" name="Simpan" value="Simpan" class="btn btn-primary ">
+			<a href="?page=data-kub" title="Kembali" class="btn btn-danger">Batal</a>
 		</div>
 	</form>
 </div>

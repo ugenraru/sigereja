@@ -1,4 +1,4 @@
-<div class="card card-primary">
+<div class="card card-info">
 	<div class="card-header">
 		<h3 class="card-title">
 			<i class="fa fa-edit"></i> Tambah Data</h3>
@@ -33,15 +33,16 @@
 					<select name="level" id="level" class="form-control">
 						<option>- Pilih -</option>
 						<option>Administrator</option>
-						<option>Kaur Pemerintah</option>
+						<option>Pengurus Gereja</option>
 					</select>
 				</div>
 			</div>
 
 		</div>
 		<div class="card-footer">
+		<div class="col-md-6 offset-md-8">
 			<input type="submit" name="Simpan" value="Simpan" class="btn btn-info">
-			<a href="?page=data-pengguna" title="Kembali" class="btn btn-secondary">Batal</a>
+			<a href="?page=data-pengguna" title="Kembali" class="btn btn-danger">Batal</a>
 		</div>
 	</form>
 </div>

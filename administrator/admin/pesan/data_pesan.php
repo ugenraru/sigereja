@@ -14,7 +14,7 @@
 						<th>Tanggal</th>
 						<th>Nama Lengkap</th>
 						<th>Email</th>
-						<th>Nomor Telepon</th>
+						<th>No.hp</th>
 						<th>Pesan</th>
 						<th>Aksi</th>
 					</tr>
@@ -41,7 +41,7 @@
 							<?php echo $data['email']; ?>
 						</td>
 						<td>
-							<?php echo $data['no_telepon']; ?>
+							<?php echo $data['subjek']; ?>
 						</td>
 						<td>
 							<?php echo $data['isi_pesan']; ?>

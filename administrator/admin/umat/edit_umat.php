@@ -8,7 +8,7 @@ if (isset($_GET['kode']))
 }
 ?>
 
-<div class="card card-success">
+<div class="card card-info">
 	<div class="card-header">
 		<h3 class="card-title">
 			<i class="fa fa-edit"></i> Ubah Data
@@ -16,14 +16,6 @@ if (isset($_GET['kode']))
 	</div>
 	<form action="" method="post" enctype="multipart/form-data">
 		<div class="card-body">
-
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">No Sistem</label>
-				<div class="col-sm-2">
-					<input type="text" class="form-control" id="id_umat" name="id_umat" value="<?php echo $data_cek['id_umat']; ?>" readonly />
-				</div>
-			</div>
-
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">NIK</label>
 				<div class="col-sm-6">
@@ -34,7 +26,7 @@ if (isset($_GET['kode']))
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nama</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" id="nama_umat" name="nama_umat" value="<?php echo $data_cek['nama_umat']; ?>" />
+					<input type="text" class="form-control" id="nama_umat" name="nama_umat" value="<?php echo $data_cek['nama_umat']; ?>"readonly />
 				</div>
 			</div>
 
@@ -81,6 +73,27 @@ if (isset($_GET['kode']))
 					</select>
 				</div>
 			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Nama Kategorial</label>
+				<div class="col-sm-4">
+					<select name="id_kategorial" id="id_kategorial" class="form-control select2bs4" required>
+						<option value="" disabled selected>- Pilih Kategorial -</option>
+						<?php
+						// ambil data dari database
+						$query = "select * from tb_kategorial where id_kategorial";
+						$hasil = mysqli_query($koneksi, $query);
+						while ($row = mysqli_fetch_array($hasil))
+						{
+						?>
+							<option value="<?php echo $row['id_kategorial'] ?>">
+								<?php echo $row['nama_kategorial'] ?>
+							</option>
+						<?php
+						}
+						?>
+					</select>
+				</div>
+			</div>
 
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Tempat Tanggal Lahir</label>
@@ -114,12 +127,43 @@ if (isset($_GET['kode']))
 						?>
 					</select>
 				</div>
-			</div>
+			</div>		
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Status Babtis</label>
+				<div class="col-sm-3">
+					<select name="status_babtis" id="status_babtis" class="form-control">
+						<option value="" disabled selected>- Pilih Babtis -</option>
+						<?php
+						//mengecek data yg dipilih sebelumnya
+						if ($data_cek['status_babtis'] == "Sudah Babtis") echo "<option value='Sudah Babtis' selected>Sudah Babtis</option>";
+						else echo "<option value='Sudah Babtis'>Sudah Babtis</option>";
 
+						if ($data_cek['status_babtis'] == "Belum Babtis") echo "<option value='Belum Babtis' selected>Belum Babtis</option>";
+						else echo "<option value='Belum Babtis'>Belum Babtis</option>";
+						?>
+					</select>
+				</div>
+			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Alamat</label>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $data_cek['alamat']; ?>" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Status Komuni</label>
+				<div class="col-sm-3">
+					<select name="status_komuni" id="status_komuni" class="form-control">
+						<option value="" disabled selected>- Pilih Komuni  -</option>
+						<?php
+						//mengecek data yg dipilih sebelumnya
+						if ($data_cek['status_komuni'] == "Sudah Komuni") echo "<option value='Sudah Komuni' selected>Sudah Komuni</option>";
+						else echo "<option value='Sudah'>Sudah Komuni</option>";
+
+						if ($data_cek['status_komuni'] == "Belum Komuni") echo "<option value='Belum Komuni' selected>Belum Komuni</option>";
+						else echo "<option value='Belum Komuni'>Belum Komuni</option>";
+						?>
+					</select>
 				</div>
 			</div>
 
@@ -186,6 +230,22 @@ if (isset($_GET['kode']))
 
 						if ($data_cek['pendidikan'] == "Tidak Bersekolah") echo "<option value='Tidak Bersekolah' selected>SMK</option>";
 						else echo "<option value='Tidak Bersekolah'>Tidak Bersekolah</option>";
+						?>
+					</select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Status Krisma</label>
+				<div class="col-sm-3">
+					<select name="status_krisma" id="status_krisma" class="form-control">
+						<option value="" disabled selected>- Pilih Status -</option>
+						<?php
+						//mengecek data yg dipilih sebelumnya
+						if ($data_cek['status_krisma'] == "Sudah Krisma") echo "<option value='Sudah Krisma' selected>Sudah Krisma</option>";
+						else echo "<option value='Sudah Krisma'>Sudah Krisma</option>";
+
+						if ($data_cek['status_krisma'] == "Belum Krisma") echo "<option value='Belum Krisma' selected>Belum Krisma</option>";
+						else echo "<option value='Belum Krisma'>Belum Krisma</option>";
 						?>
 					</select>
 				</div>
@@ -274,73 +334,40 @@ if (isset($_GET['kode']))
 					<input type="text" class="form-control" id="no_hp" name="no_hp" value="<?php echo $data_cek['no_hp']; ?>" />
 				</div>
 			</div>
-
-			<!-- <div class="form-group row">
-				<label class="col-sm-2 col-form-label">TTN</label>
-				<div class="col-sm-3">
-					<input type="text" class="form-control" id="tempat_nikah" name="tempat_nikah" value="<?php echo $data_cek['tempat_nikah']; ?>"
-					/>
-				</div>
-				<div class="col-sm-3">
-					<input type="date" class="form-control" id="tanggal_nikah" name="tanggal_nikah" value="<?php echo $data_cek['tanggal_nikah']; ?>"
-					/>
-				</div>
-			</div>
-
-		  <div class="form-group row">
-				<label class="col-sm-2 col-form-label">TTK</label>
-				<div class="col-sm-3">
-					<input type="text" class="form-control" id="tempat_komuni" name="tempat_komuni" value="<?php echo $data_cek['tempat_komuni']; ?>"
-					/>
-				</div>
-				<div class="col-sm-3">
-					<input type="date" class="form-control" id="tanggal_komuni" name="tanggal_komuni" value="<?php echo $data_cek['tanggal_komuni']; ?>"
-					/>
-				</div>
-			</div>
-
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">TTB</label>
-				<div class="col-sm-3">
-					<input type="text" class="form-control" id="tempat_baptis" name="tempat_baptis" value="<?php echo $data_cek['tempat_baptis']; ?>"
-					/>
-				</div>
-				<div class="col-sm-3">
-					<input type="date" class="form-control" id="tanggal_baptis" name="tanggal_baptis" value="<?php echo $data_cek['tanggal_baptis']; ?>"
-					/>
-				</div>
-			</div>
- -->
 		</div>
 		<div class="card-footer">
-			<input type="submit" name="Ubah" value="Simpan" class="btn btn-success">
-			<a href="?page=data-umat" title="Kembali" class="btn btn-secondary">Batal</a>
+		<div class="col-md-6 offset-md-6">
+			<input type="submit" name="Ubah" value="Simpan" class="btn btn-primary">
+			<a href="?page=data-umat" title="Kembali" class="btn btn-danger">Batal</a>
 		</div>
 	</form>
 </div>
 
 <?php
 
-if (isset($_POST['Ubah']))
-{
+if (isset($_POST['Ubah'])){
+	$id=$_GET['kode'];
 	$sql_ubah = "UPDATE tb_umat SET 
 		nik='" . $_POST['nik'] . "',
 		nama_umat='" . $_POST['nama_umat'] . "',
 		id_kub='" . $_POST['id_kub'] . "',
 		id_lingkungan='" . $_POST['id_lingkungan'] . "',
+		id_kategorial='" . $_POST['id_kategorial'] . "',
 		jenis_kelamin='" . $_POST['jenis_kelamin'] . "',
+		status_babtis='" . $_POST['status_babtis'] . "',
 		alamat='" . $_POST['alamat'] . "',
+		status_komuni='" . $_POST['status_komuni'] . "',
 		rt='" . $_POST['rt'] . "',
 		rw='" . $_POST['rw'] . "',
 		pekerjaan='" . $_POST['pekerjaan'] . "',
 		jabatan_gereja='" . $_POST['jabatan_gereja'] . "',
 		pendidikan='" . $_POST['pendidikan'] . "',
+		status_krisma='" . $_POST['status_krisma'] . "',
 		gol_darah='" . $_POST['gol_darah'] . "',
 		no_hp='" . $_POST['no_hp'] . "',
 		tempat_lahir='" . $_POST['tempat_lahir'] . "',
 		tanggal_lahir='" . $_POST['tanggal_lahir'] . "',
-		status_kawin='" . $_POST['status_kawin'] . "'
-		WHERE id_umat='" . $_POST['id_umat'] . "'";
+		status_kawin='" . $_POST['status_kawin'] . "' where id_umat='$id'";
 	$query_ubah = mysqli_query($koneksi, $sql_ubah);
 	mysqli_close($koneksi);
 

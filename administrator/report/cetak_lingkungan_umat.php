@@ -88,7 +88,7 @@ padding: 5px;
 <tr>
   <td align="jusrt"></td>
   <td align="center" width="200px">
-   Ende, <?php echo tglIndonesia(date('d F Y', strtotime($tgl))) ?>
+   Kupang, <?php echo tglIndonesia(date('d F Y', strtotime($tgl))) ?>
     <br/>Pastor Paroki<br/><br/><br/><br/>
     <b><u><?php echo $data_cek18["pastor_paroki"]; ?></u><br/></b>
   </td>

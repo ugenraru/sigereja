@@ -9,7 +9,7 @@ include "inc/koneksi.php";
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GEREJA SANTO KAROLUS AGUNG ORAKERI ENDE</title>
+	<title>GEREJA PAROKI SANTA FAMILIA SIKUMANA</title>
 	<link rel="icon" href="dist/img/logo.png">
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,7 +26,7 @@ include "inc/koneksi.php";
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-color: gray;">
 	<div class="login-box">
 		<div class="login-logo">
 		</div>
@@ -34,11 +34,11 @@ include "inc/koneksi.php";
 		<div class="card">
 			<div class="card-body login-card-body">
 				<center>
-					<img src="dist/img/logo.png" width=180px />
+					<img src="dist/img/logo.png" width=90px />
 					<br>
-					<h3>
-						<b>GEREJA SANTO KAROLUS AGUNG ORAKERI ENDE</b>
-					</h3>
+					<h4>
+						<b>GEREJA PAROKI SANTA FAMILIA SIKUMANA</b>
+					</h4>
 					<br>
 				</center>
 
@@ -60,9 +60,10 @@ include "inc/koneksi.php";
 							</div>
 						</div>
 					</div>
+					
 					<div class="row">
 						<div class="col-12">
-							<button type="submit" class="btn btn-primary btn-block btn-flat" name="btnLogin" title="Masuk Sistem">
+							<button type="submit" class="btn btn-primary " name="btnLogin" title="Masuk Sistem">
 								<b>Masuk</b>
 							</button>
 						</div>

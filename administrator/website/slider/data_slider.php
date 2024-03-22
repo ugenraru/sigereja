@@ -46,7 +46,7 @@
 							<a href="?page=del-slider&kode=<?php echo $data['id']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')"
 							 title="Hapus" class="btn btn-danger btn-sm">
 								<i class="fa fa-trash"></i>
-								<a/>
+			  </a>
 						</td>
 					</tr>
 

@@ -65,7 +65,7 @@ while ($data=mysqli_fetch_array($query_tampil,MYSQLI_BOTH)){?>
   <table width="100%">
     <tr>
       <td align="jusrt"></td>
-      <td align="center";width="200px"> Ende, <?php echo tglIndonesia(date('d F Y',strtotime($tgl)));?><br>Pastor Paroki<br><br><br><br><b><u><?php echo $data_cek18["pastor_paroki"];?></u></b><br></td>
+      <td align="center";width="200px"> Kupang, <?php echo tglIndonesia(date('d F Y',strtotime($tgl)));?><br>Pastor Paroki<br><br><br><br><b><u><?php echo $data_cek18["pastor_paroki"];?></u></b><br></td>
     </tr>
   </table>
 </body>

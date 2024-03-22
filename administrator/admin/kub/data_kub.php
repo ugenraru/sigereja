@@ -4,10 +4,13 @@
 			<i class="fa fa-table"></i> Data KUB</h3>
 	</div>
 	<!-- /.card-header -->
-	<div class="card-body">
+	<div class="card-body ">
+		
 		<div class="table-responsive">
 			<div>
-				<a href="?page=add-kub" class="btn btn-primary">
+			<h5>SEMUA DATA KUB YANG TERDAFTAR</h5>
+			<div class="col-md-6 offset-md-10">
+				<a href="?page=add-kub" class="btn btn-primary ">
 					<i class="fa fa-edit"></i> Tambah Data</a>
 			</div>
 			<br>
@@ -71,7 +74,7 @@
 							<a href="?page=del-kub&kode=<?php echo $data['id_kub']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')"
 							 title="Hapus" class="btn btn-danger btn-sm">
 								<i class="fa fa-trash"></i>
-								<a/>
+			  </a>
 						</td>
 					</tr>
 

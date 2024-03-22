@@ -1,13 +1,11 @@
 <?php
 
+
 //Mulai Sesion
 session_start();
-if (isset($_SESSION["ses_username"]) == "")
-{
-	header("location: login.hophp");
-}
-else
-{
+if (isset($_SESSION["ses_username"]) == "") {
+	header("location: login.php");
+} else {
 	$data_id = $_SESSION["ses_id"];
 	$data_nama = $_SESSION["ses_nama"];
 	$data_user = $_SESSION["ses_username"];
@@ -18,8 +16,7 @@ else
 include "inc/koneksi.php";
 //query untuk tabel pesan ata mengambil jumlah pesan pada tabel pesan
 $sql = $koneksi->query("SELECT COUNT(id_pesan) as pesan  from tb_pesan");
-while ($data = $sql->fetch_assoc())
-{
+while ($data = $sql->fetch_assoc()) {
 	$pesan = $data['pesan'];
 }
 
@@ -27,11 +24,10 @@ while ($data = $sql->fetch_assoc())
 
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GEREJA SANTO KAROLUS AGUNG ORAKERI ENDE</title>
+	<title>GEREJA PAROKI SANTA FAMILIA SIKUMANA</title>
 	<link rel="icon" href="dist/img/logo.png">
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,6 +36,7 @@ while ($data = $sql->fetch_assoc())
 	<link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
 	<!-- Ionicons -->
 	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<!-- DataTables -->
 	<link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 	<!-- overlayScrollbars -->
@@ -54,12 +51,11 @@ while ($data = $sql->fetch_assoc())
 </head>
 
 
-
 <body class="hold-transition sidebar-mini">
 	<!-- Site wrapper -->
 	<div class="wrapper">
 		<!-- Navbar -->
-		<nav class="main-header navbar navbar-expand navbar-red navbar-light">
+		<nav class="main-header navbar navbar-expand navbar-green navbar-light">
 			<!-- Left navbar links -->
 			<ul class="navbar-nav">
 				<li class="nav-item">
@@ -69,10 +65,9 @@ while ($data = $sql->fetch_assoc())
 				</li>
 
 			</ul>
-
-			<!-- SEARCH FORM -->
-			<ul class="navbar-nav ml-auto">
-
+			
+			<ul class="navbar-nav position-absolute" style="right:14%;">
+	
 				<!-- Menampilkan jumlah pesan -->
 				<!-- Notifications Dropdown Menu -->
 				<li class="nav-item dropdown">
@@ -91,69 +86,87 @@ while ($data = $sql->fetch_assoc())
 					</div>
 				</li>
 
-				<li class="nav-item d-none d-sm-inline-block">
-					<a href="index.php" class="nav-link">
-						<font color="white">
-							<b>SISTEM INFORMASI GEREJA SANTO KAROLUS AGUNG ORAKERI ENDE</b>
-						</font>
-					</a>
+
+				
+				<li class="nav-item d-none d-sm-inline-block float-right">
+					
+
+					<li class="nav-item dropdown  position-absolute" style="right:-340%;">
+						<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-expanded="false"><img src="./dist/img/admin.ico" class="rounded-circle" style="width:2rem;height:2rem" alt="" srcset=""> <span class="badge badge-warning"><?=$_SESSION["ses_level"]?>
+						</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="?page=data-pengguna"><i class="nav-icon fas fa-user"></i> Admin Sistem</a>
+							<a class="dropdown-item" onclick="return confirm('Apakah anda yakin akan keluar ?')" href="logout.php"><i class="nav-icon fas fa-arrow-circle-right"></i> Keluar</a> 
+						</div>
+					</li>
+
 				</li>
 
 			</ul>
 
 		</nav>
 		<!-- /.navbar -->
+		
 
 
 
 		<!-- Main Sidebar Container -->
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-			<!-- Brand Logo -->
-			<!-- 			<a href="index.php" class="brand-link">
-				<img src="dist/img/izin.png" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
-				<span class="brand-text"> SI GEREJA</span>
-			</a> -->
-
-			<!-- Sidebar -->
 			<div class="sidebar">
+		
 				<!-- Sidebar user (optional) -->
 				<div class="user-panel mt-2 pb-2 mb-2 d-flex">
 					<div class="image">
-						<img src="dist/img/admin.ico">
+					<font color="white">
+					<b> GEREJA PAROKI ST. FAMILIA</b>
+						</font>
 					</div>
 					<div class="info">
-						<a href="index.php" class="d-block">
-							<?php echo $data_nama; ?>
+					
+					
 						</a>
-						<span class="badge badge-success">
-							<?php echo $data_level; ?>
+				
+						
 						</span>
 					</div>
 				</div>
+				
 
 				<!-- Sidebar Menu -->
+				
 				<nav class="mt-2">
 					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 						<!-- Menampilkan menu berdasarkan level pengguna -->
 						<!-- Level  -->
+						<br>
+					
+						
 						<?php
-						if ($data_level == "Administrator")
-						{
+						
+						if ($data_level == "Administrator") {
 						?>
+						
+						<li class="nav-header">Main Menu</li>
+
+						<li class="nav-item">
+	
+							</a>
+								</li>
 							<li class="nav-item">
 								<a href="index.php" class="nav-link">
-									<i class="nav-icon fas fa-tachometer-alt"></i>
+									<i class="nav-icon fas fa-home"></i>
 									<p>
+										
 										Dashboard
 									</p>
 								</a>
 							</li>
-
+						
 							<li class="nav-item has-treeview">
 								<a href="#" class="nav-link">
-									<i class="nav-icon fas fa-table"></i>
+									<i class="nav-icon fas fa-book"></i>
 									<p>
-										Kelola Data
+										Kelola Data Gereja
 										<i class="fas fa-angle-left right"></i>
 									</p>
 								</a>
@@ -164,188 +177,203 @@ while ($data = $sql->fetch_assoc())
 										<p>Data Penduduk</p>
 									</a>
 								</li> -->
-									<li class="nav-item">
-										<a href="?page=data-umat" class="nav-link">
-											<i class="nav-icon far fa-circle text-warning"></i>
-											<p>Data Umat</p>
+								<li class="nav-item">
+										<a href="?page=data-mutasi-masuk" class="nav-link">
+											<i class="fas fa-book"></i>
+											<p>Data Mutasi Masuk</p>
 										</a>
 									</li>
 									<li class="nav-item">
-										<a href="?page=data-kartu" class="nav-link">
-											<i class="nav-icon far fa-circle text-warning"></i>
-											<p>Data Kartu Keluarga</p>
+										<a href="?page=data-umat" class="nav-link">
+											<i class="fas fa-book"></i>
+											<p>Data Umat Paroki</p>
 										</a>
 									</li>
 									<li class="nav-item">
 										<a href="?page=data-kub" class="nav-link">
-											<i class="nav-icon far fa-circle text-warning"></i>
-											<p>Data KUB</p>
+											<i class="fas fa-book"></i>
+											<p>Data Kelompok KUB</p>
+										</a>
+									</li>
+									</li>
+									<li class="nav-item">
+										<a href="?page=data-lingkungan" class="nav-link">
+											<i class="fas fa-book"></i>
+											<p>Data Lingkungan</p>
 										</a>
 									</li>
 									<li class="nav-item">
 										<a href="?page=data-stasi" class="nav-link">
-											<i class="nav-icon far fa-circle text-warning"></i>
+											<i class="fas fa-book"></i>
 											<p>Data Stasi</p>
+										</a>
+										<li class="nav-item">
+										<a href="?page=data-kategorial" class="nav-link">
+											<i class="fas fa-book"></i>
+											<p>Data Kelompok Kategorial</p>
+										</a>
+									<li class="nav-item">
+										<a href="?page=data-pindah" class="nav-link">
+											<i class="fas fa-book"></i>
+											<p>Data Perpindahan</p>
 										</a>
 									</li>
 									<li class="nav-item">
-										<a href="?page=data-lingkungan" class="nav-link">
+										<a href="?page=data-mutasi-keluar" class="nav-link">
+											<i class="fas fa-book"></i>
+											<p>Data Mutasi Keluar</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="?page=data-kematian" class="nav-link">
+											<i class="fas fa-book"></i>
+											<p>Data Kematian</p>
+										</a>
+									</li>
+									<!-- <li class="nav-item">
+										<a href="?page=data-kartu" class="nav-link">
 											<i class="nav-icon far fa-circle text-warning"></i>
-											<p>Data Lingkungan</p>
+											<p>Data Kartu Keluarga</p>
+										</a>
+									</li> -->
+									
+									<li class="nav-item">
+										<a href="?page=data-pengurus" class="nav-link">
+											<i class="fas fa-book"></i>
+											<p>Data Pengurus</p>
+										</a>
+									</li>
+									
+									<li class="nav-item">
+										<a href="?page=data-periode" class="nav-link">
+											<i class="fas fa-book"></i>
+											<p>Data Periode</p>
 										</a>
 									</li>
 								</ul>
 							</li>
 
-							<!-- 						<li class="nav-item has-treeview">
-							<a href="#" class="nav-link">
-								<i class="nav-icon fas fa-file"></i>
-								<p>
-									Kelola Surat
-									<i class="fas fa-angle-left right"></i>
-								</p>
-							</a>
-							<ul class="nav nav-treeview">
 
-								<li class="nav-item">
-									<a href="?page=suket-domisili" class="nav-link">
-										<i class="nav-icon far fa-circle text-warning"></i>
-										<p>Su-Ket Domisili</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="?page=suket-lahir" class="nav-link">
-										<i class="nav-icon far fa-circle text-warning"></i>
-										<p>Su-Ket Kelahiran</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="?page=suket-mati" class="nav-link">
-										<i class="nav-icon far fa-circle text-warning"></i>
-										<p>Su-Ket Kematian</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="?page=suket-datang" class="nav-link">
-										<i class="nav-icon far fa-circle text-warning"></i>
-										<p>Su-Ket Pendatang</p>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="?page=suket-pindah" class="nav-link">
-										<i class="nav-icon far fa-circle text-warning"></i>
-										<p>Su-Ket Pindah</p>
-									</a>
-								</li>
-							</ul>
-						</li> -->
 
 
 							<li class="nav-item has-treeview">
 								<a href="#" class="nav-link">
 									<i class="nav-icon fas fa-print"></i>
 									<p>
-										Kelola Laporan
+										Kelola Laporan Gereja
 										<i class="fas fa-angle-left right"></i>
 									</p>
 								</a>
 								<ul class="nav nav-treeview">
-
+								<li class="nav-item">
+										<a href="?page=laporan-mutasi-masuk" class="nav-link">
+											<i class="fas fa-book"></i>
+											<p>Data Mutasi Masuk</p>
+										</a>
+									</li>
+								
+								<li class="nav-item">
+										<a href="?page=laporan-umat" class="nav-link">
+											<i class="fas fa-book"></i>
+											<p>Data Umat Paroki</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="?page=laporan-perpindahan" class="nav-link">
+											<i class="fas fa-book"></i>
+											<p>Data Perpindahan</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="?page=laporan-kategorial-umat" class="nav-link">
+										<i class="fas fa-book"></i>
+											<p>Data Kategorial Umat</p>
+										</a>
+									</li>
+								
 									<li class="nav-item">
 										<a href="?page=laporan-kub-umat" class="nav-link">
-											<i class="nav-icon far fa-circle text-warning"></i>
+											<i class="fas fa-book"></i>
 											<p>Data KUB Umat</p>
 										</a>
 									</li>
 									<li class="nav-item">
 										<a href="?page=laporan-lingkungan-umat" class="nav-link">
-											<i class="nav-icon far fa-circle text-warning"></i>
+											<i class="fas fa-book"></i>
 											<p>Data Lingkungan Umat</p>
 										</a>
 									</li>
 									<li class="nav-item">
 										<a href="?page=laporan-stasi-umat" class="nav-link">
-											<i class="nav-icon far fa-circle text-warning"></i>
+										<i class="fas fa-book"></i>
 											<p>Data Stasi Umat</p>
 										</a>
 									</li>
+									<li class="nav-item">
+										<a href="?page=laporan-kematian" class="nav-link">
+											<i class="fas fa-book"></i>
+											<p>Data Kematian</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="?page=laporan-mutasi-keluar" class="nav-link">
+											<i class="fas fa-book"></i>
+											<p>Data Mutasi Keluar</p>
+										</a>
+									</li>
+									
 								</ul>
 							</li>
-							<li class="nav-item has-treeview">
-								<a href="#" class="nav-link">
-									<i class="nav-icon fas fa-cogs"></i>
-									<p>
-										Pengaturan Website
-										<i class="fas fa-angle-left right"></i>
-									</p>
-								</a>
-								<ul class="nav nav-treeview">
-									<li class="nav-item">
-										<a href="?page=data-kegiatan" class="nav-link">
-											<i class="nav-icon far fa-circle text-warning"></i>
-											<p>Data Kegiatan</p>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a href="?page=data-berita" class="nav-link">
-											<i class="nav-icon far fa-circle text-warning"></i>
-											<p>Data Berita</p>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a href="?page=data-kalender" class="nav-link">
-											<i class="nav-icon far fa-circle text-warning"></i>
-											<p>Data Kalender</p>
-										</a>
-									</li>
-
-									<li class="nav-item">
-										<a href="?page=data-slider" class="nav-link">
-											<i class="nav-icon far fa-circle text-warning"></i>
-											<p>Data Slider</p>
-										</a>
-									</li>
-
-									<li class="nav-item">
-										<a href="?page=edit-pengaturan" class="nav-link">
-											<i class="nav-icon far fa-circle text-warning"></i>
-											<p>Pengaturan</p>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a href="../index.php" target="_blank" class="nav-link">
-											<i class="nav-icon far fa-circle text-warning"></i>
-											<p>Lihat Website</p>
-										</a>
-									</li>
-								</ul>
-							</li>
+						
 
 
-							<li class="nav-header">Pengaturan</li>
+
+							<li class="nav-header">Website</li>
 
 							<li class="nav-item">
-								<a href="?page=data-pengguna" class="nav-link">
-									<i class="nav-icon fas fa-user"></i>
-									<p>
-										Admin Sistem
-									</p>
+								
 								</a>
 							</li>
 
 						<?php
 						}
-						?>
+						?>	<li class="nav-item has-treeview">
+						<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-wrench"></i> 
+							<p>
+								Pengendalian Website 
+								<i class="fas fa-angle-left right"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="?page=data-kegiatan" class="nav-link">
+									<i class="fas fa-book"></i>
+									<p>Data Kegiatan Gereja</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="?page=data-berita" class="nav-link">
+									<i class="fas fa-book"></i>
+									<p>Data Berita Gereja</p>
+									</a>
+							</li>
+							<li class="nav-item">
+								<a href="?page=edit-pengaturan" class="nav-link">
+									<i class="fas fa-cog"></i>
+									<p>Pengaturan</p>
+									</a>
+					</li>
+							<li class="nav-item">
+							<a  href="../index.php" class="nav-link">
+								<i class="fas fa-dove"></i>
+									<p>Lihat Website</p>
+									</a>
+							</li>
+						</ul>
+					</li>
 
 
-						<li class="nav-item">
-							<a onclick="return confirm('Apakah anda yakin akan keluar ?')" href="logout.php" class="nav-link">
-								<i class="nav-icon fas fa-arrow-circle-right"></i>
-								<p>
-									Keluar
-								</p>
-							</a>
-						</li>
 
 				</nav>
 				<!-- /.sidebar-menu -->
@@ -365,13 +393,10 @@ while ($data = $sql->fetch_assoc())
 				<div class="container-fluid">
 					<!-- Memanggil dan menampilkan halaman misalkan menampilkan isi tabel pengguna -->
 					<?php
-					if (isset($_GET['page']))
-					{
+					if (isset($_GET['page'])) {
 						$hal = $_GET['page'];
 
-						switch ($hal)
-						{
-
+						switch ($hal) {
 								//Pengguna
 							case 'data-pengguna':
 								include "admin/pengguna/data_pengguna.php";
@@ -386,26 +411,6 @@ while ($data = $sql->fetch_assoc())
 								include "admin/pengguna/del_pengguna.php";
 								break;
 
-								//kartu KK
-							case 'data-kartu':
-								include "admin/kartu/data_kartu.php";
-								break;
-							case 'add-kartu':
-								include "admin/kartu/add_kartu.php";
-								break;
-							case 'edit-kartu':
-								include "admin/kartu/edit_kartu.php";
-								break;
-							case 'anggota':
-								include "admin/kartu/anggota.php";
-								break;
-							case 'del-anggota':
-								include "admin/kartu/del_anggota.php";
-								break;
-							case 'del-kartu':
-								include "admin/kartu/del_kartu.php";
-								break;
-
 								//umat
 							case 'data-umat':
 								include "admin/umat/data_umat.php";
@@ -416,6 +421,9 @@ while ($data = $sql->fetch_assoc())
 							case 'data-umat-perempuan':
 								include "admin/umat/data_umat_perempuan.php";
 								break;
+								case 'data-umat-babtis':
+									include "admin/umat/data_umat_babtis.php";
+									break;
 							case 'add-umat':
 								include "admin/umat/add_umat.php";
 								break;
@@ -427,6 +435,9 @@ while ($data = $sql->fetch_assoc())
 								break;
 							case 'view-umat':
 								include "admin/umat/view_umat.php";
+								break;
+							case 'mutasi-keluar':
+								include "admin/umat/mutasi_keluar.php";
 								break;
 
 								//stasi
@@ -441,6 +452,20 @@ while ($data = $sql->fetch_assoc())
 								break;
 							case 'del-stasi':
 								include "admin/stasi/del_stasi.php";
+								break;
+								
+								//jalur -kategorial
+							case 'data-kategorial':
+								include "admin/kategorial/data_kategorial.php";
+								break;
+							case 'add-kategorial':
+								include "admin/kategorial/add_kategorial.php";
+								break;
+							case 'edit-kategorial':
+								include "admin/kategorial/edit_kategorial.php";
+								break;
+							case 'del-kategorial':
+								include "admin/kategorial/del_kategorial.php";
 								break;
 
 								//lingkungan
@@ -471,7 +496,94 @@ while ($data = $sql->fetch_assoc())
 								include "admin/kub/del_kub.php";
 								break;
 
+								//periode
+							case 'data-periode':
+								include "admin/periode/data_periode.php";
+								break;
+							case 'add-periode':
+								include "admin/periode/add_periode.php";
+								break;
+							case 'edit-periode':
+								include "admin/periode/edit_periode.php";
+								break;
+							case 'del-periode':
+								include "admin/periode/del_periode.php";
+								break;
+								//mutasi
+							case 'data-mutasi-masuk':
+								include "admin/mutasi_masuk/data_mutasi.php";
+								break;
+							case 'add-mutasi-masuk':
+								include "admin/mutasi_masuk/add_mutasi.php";
+								break;
+							case 'edit-mutasi-masuk':
+								include "admin/mutasi_masuk/edit_mutasi.php";
+								break;
+							case 'del-mutasi-masuk':
+								include "admin/mutasi_masuk/del_mutasi.php";
+								break;
+
+								//mutasi keluar
+							case 'data-mutasi-keluar':
+								include "admin/mutasi_keluar/data_mutasi.php";
+								break;
+							case 'add-mutasi-keluar':
+								include "admin/mutasi_keluar/add_mutasi.php";
+								break;
+							case 'edit-mutasi-keluar':
+								include "admin/mutasi_keluar/edit_mutasi.php";
+								break;
+							case 'del-mutasi-keluar':
+								include "admin/mutasi_keluar/del_mutasi.php";
+								break;
+
+								//kematian
+							case 'data-kematian':
+								include "admin/kematian/data_kematian.php";
+								break;
+							case 'add-kematian':
+								include "admin/kematian/add_kematian.php";
+								break;
+							case 'edit-kematian':
+								include "admin/kematian/edit_kematian.php";
+								break;
+							case 'del-kematian':
+								include "admin/kematian/del_kematian.php";
+								break;
+
+								//pindah
+							case 'data-pindah':
+								include "admin/pindah/data_pindah.php";
+								break;
+							case 'add-pindah':
+								include "admin/pindah/add_pindah.php";
+								break;
+							case 'edit-pindah':
+								include "admin/pindah/edit_pindah.php";
+								break;
+							case 'del-pindah':
+								include "admin/pindah/del_pindah.php";
+								break;
+
+								//pengurus
+							case 'data-pengurus':
+								include "admin/pengurus/data_pengurus.php";
+								break;
+							case 'add-pengurus':
+								include "admin/pengurus/add_pengurus.php";
+								break;
+							case 'edit-pengurus':
+								include "admin/pengurus/edit_pengurus.php";
+								break;
+							case 'del-pengurus':
+								include "admin/pengurus/del_pengurus.php";
+								break;
+
+
 								//laporan
+							case 'laporan-umat':
+									include "laporan/laporan_umat.php";
+									break;
 							case 'laporan-kub-umat':
 								include "laporan/laporan_kub_umat.php";
 								break;
@@ -481,7 +593,21 @@ while ($data = $sql->fetch_assoc())
 							case 'laporan-stasi-umat':
 								include "laporan/laporan_stasi_umat.php";
 								break;
-
+								case 'laporan-kategorial-umat':
+									include "laporan/laporan_kategorial_umat.php";
+									break;
+							case 'laporan-kematian':
+								include "laporan/laporan_kematian.php";
+								break;
+							case 'laporan-mutasi-keluar':
+								include "laporan/laporan_mutasi_keluar.php";
+								break;
+								case 'laporan-mutasi-masuk':
+									include "laporan/laporan_mutasi_masuk.php";
+									break;
+									case 'laporan-perpindahan':
+										include "laporan/laporan_perpindahan.php";
+										break;
 								//pengaturan website
 							case 'edit-pengaturan':
 								include "website/pengaturan/edit_pengaturan.php";
@@ -500,6 +626,7 @@ while ($data = $sql->fetch_assoc())
 							case 'del-berita':
 								include "website/berita/del_berita.php";
 								break;
+								
 
 								//kegiatan	
 							case 'data-kegiatan':
@@ -515,7 +642,7 @@ while ($data = $sql->fetch_assoc())
 								include "website/kegiatan/del_kegiatan.php";
 								break;
 
-							
+
 
 								//kalender
 							case 'data-kalender':
@@ -552,22 +679,20 @@ while ($data = $sql->fetch_assoc())
 							case 'del-pesan':
 								include "admin/pesan/del_pesan.php";
 
+							case 'query':
+								include "query.php";
+
 
 								//default
 							default:
 								echo "<center><h1> ERROR !</h1></center>";
 								break;
 						}
-					}
-					else
-					{
+					} else {
 						// Auto Halaman Home Pengguna atau menampilkan halaman dashboard
-						if ($data_level == "Administrator")
-						{
+						if ($data_level == "Administrator") {
 							include "home/admin.php";
-						}
-						elseif ($data_level == "Kaur Pemerintah")
-						{
+						} elseif ($data_level == "Kaur Pemerintah") {
 							include "home/kaur.php";
 						}
 					}
@@ -580,15 +705,15 @@ while ($data = $sql->fetch_assoc())
 		</div>
 		<!-- /.content-wrapper -->
 
-		<footer class="main-footer">
+		<footer class="main-footer ">
 			<div class="float-right d-none d-sm-block">
-				Copyright &copy; 2022. Developer -
+				Copyright &copy; 2024. Developer -
 				<a target="_blank" href="https://www.youtube.com/channel/UCpusqK_s8aQJvjGuuMofBTA">
-					<strong> Gereja Santo Karolus Agung Orakeri Ende</strong>
+					<strong> Gereja Paroki Santa Familia Sikumana</strong>
 				</a>.
 				All rights reserved.
 			</div>
-			<b>Sistem Informasi Gereja Versi 2022</b>
+			<b>Sistem Informasi Gereja Versi 2024</b>
 		</footer>
 
 		<!-- Control Sidebar -->
@@ -661,23 +786,23 @@ while ($data = $sql->fetch_assoc())
 		const targetkepalaKeluarga = document.getElementById("kepalaKeluarga");
 		const btnKeluarga = document.getElementById("btnKeluarga");
 
-		function funKeluarga() {
-			const jskeluarga = document.getElementById("divKeluarga");
-			if (jskeluarga.style.display === "none") {
-				jskeluarga.style.display = "block";
-			} else {
-				jskeluarga.style.display = "none";
-			}
-		}
+		// function funKeluarga() {
+		// 	const jskeluarga = document.getElementById("divKeluarga");
+		// 	if (jskeluarga.style.display === "none") {
+		// 		jskeluarga.style.display = "block";
+		// 	} else {
+		// 		jskeluarga.style.display = "none";
+		// 	}
+		// }
 
-		function funNonKeluarga() {
-			const jsnonkeluarga = document.getElementById("divNonKeluarga");
-			if (jsnonkeluarga.style.display === "none") {
-				jsnonkeluarga.style.display = "block";
-			} else {
-				jsnonkeluarga.style.display = "none";
-			}
-		}
+		// function funNonKeluarga() {
+		// 	const jsnonkeluarga = document.getElementById("divNonKeluarga");
+		// 	if (jsnonkeluarga.style.display === "none") {
+		// 		jsnonkeluarga.style.display = "block";
+		// 	} else {
+		// 		jsnonkeluarga.style.display = "none";
+		// 	}
+		// }
 
 
 		function hitungUmur(tanggalLahir) {

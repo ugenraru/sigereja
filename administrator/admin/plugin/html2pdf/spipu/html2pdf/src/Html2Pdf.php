@@ -171,7 +171,7 @@ class Html2Pdf
      * @return Html2Pdf
      */
     public function __construct(
-        $orientation = 'P',
+        $orientation = 'L',
         $format = 'A4',
         $lang = 'fr',
         $unicode = true,

@@ -1,2 +1,7 @@
 <?php
-$koneksi = new mysqli ("localhost","root","","data_gereja");
+$koneksi = new mysqli ("localhost","root","","sigereja");
+
+
+function oke(){
+    echo json_encode('okok');
+}

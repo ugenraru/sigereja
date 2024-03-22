@@ -1,89 +1,64 @@
-<div class="card card-primary">
+<div class="card card-info">
 	<div class="card-header">
 		<h3 class="card-title">
-			<i class="fa fa-edit"></i> Tambah Data
+			<i class="fa fa-edit"></i> Tambah Data Umat
 		</h3>
 	</div>
 	<div class="card-body">
-		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Apakah Anda Kepala Keluarga ?</label>
-			<div class="col-sm-6">
-				<button onclick="funKeluarga()" class="btn btn-primary">Ya</button>
-				<button onclick="funNonKeluarga()" class="btn btn-primary">Tidak</button>
-			</div>
-		</div>
 		<form action="" method="post" enctype="multipart/form-data">
-			<div id="keluarga">
-				<div id="divKeluarga" style="display: none">
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">No Kartu Keluarga</label>
-						<div class="col-sm-6">
-							<input type="text" class="form-control" id="kepalaKeluarga2" id="no_kk" name="no_kk" placeholder="No Kartu Keluarga">
-						</div>
-					</div>
-				</div>
-
-				<div id="divNonKeluarga" style="display: none">
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Kepala Keluarga</label>
-						<div class="col-sm-6">
-							<select name="idkk" id="kepala_keluarga" class="form-control">
-								<option value="" disabled selected>- Pilih Kepala Keluarga -</option>
-								<?php
-								// ambil data dari database
-								$queryN = "SELECT * FROM tb_kk JOIN tb_umat  ON tb_umat.nama_umat = tb_kk.kepala_keluarga GROUP BY id_kk";
-								$hasilN = mysqli_query($koneksi, $queryN);
-								while ($row = mysqli_fetch_array($hasilN))
-								{
-								?>
-									<option value="<?= $row['id_kk'] ?>">
-										<?= $row['no_kk'] . '-' . $row['nama_umat'] ?>
-									</option>
-								<?php
-								}
-								?>
-							</select>
-						</div>
-					</div>
-
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Relasi dengan Kepala keluarga</label>
-						<div class="col-sm-3">
-							<select name="hubungan" id="hubungan" class="form-control">
-								<option value="" disabled selected>- Hub Keluarga -</option>
-								<option>Istri</option>
-								<option>Anak</option>
-								<option>Orang Tua</option>
-								<option>Mertua</option>
-								<option>Menantu</option>
-								<option>Cucu</option>
-								<option>Famili Lain</option>
-							</select>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<br>
-			<br>
-
-
-
-
-
-
-
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">NIK</label>
-				<div class="col-sm-6">
-					<input type="text" class="form-control" id="nik" name="nik" placeholder="NIK" required>
+				<div class="col-sm-4">
+					<select name="nik" id="nik" class="form-control select2bs4" required>
+						<option value="" disabled selected>- Pilih NIK -</option>
+						<?php
+						// ambil data dari database
+						$query = "select a.* from tb_mutasi_masuk a left join tb_umat b on a.nik=b.nik where isnull(b.id_umat)";
+						$hasil = mysqli_query($koneksi, $query);
+						while ($row = mysqli_fetch_array($hasil)) {
+						?>
+							<option value="<?php echo $row['nik'] ?>">
+								<?php echo $row['nik'] ?>
+							</option>
+						<?php
+						}
+						?>
+					</select>
 				</div>
+				<div class="col-sm-2">
+					<button id="btn_nik" class="btn btn-info" type="button"> Cari</button>
+				</div>	
+				<!-- <div class="col-sm-6">
+					<input type="text" class="form-control" id="nik" name="nik" placeholder="NIK" required>
+				</div> -->
 			</div>
 
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nama</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" id="nama_umat" name="nama_umat" placeholder="Nama Umat" required>
+					<input type="text" class="form-control" id="nama_umat" name="nama_umat" placeholder="Nama Umat" readonly>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Nama Kategorial</label>
+				<div class="col-sm-4">
+					<select name="id_kategorial" id="id_kategorial" class="form-control select2bs4" required>
+						<option value="" disabled selected>- Pilih Kelompok Kategorial -</option>
+				
+					
+						<?php
+						// ambil data dari database
+						$query = "select * from tb_kategorial where id_kategorial";
+						$hasil = mysqli_query($koneksi, $query);
+						while ($row = mysqli_fetch_array($hasil)) {
+						?>
+							<option value="<?php echo $row['id_kategorial'] ?>">
+								<?php echo $row['nama_kategorial'] ?>
+							</option>
+						<?php
+						}
+						?>
+					</select>
 				</div>
 			</div>
 
@@ -96,8 +71,7 @@
 						// ambil data dari database
 						$query = "select * from tb_kub where id_kub";
 						$hasil = mysqli_query($koneksi, $query);
-						while ($row = mysqli_fetch_array($hasil))
-						{
+						while ($row = mysqli_fetch_array($hasil)) {
 						?>
 							<option value="<?php echo $row['id_kub'] ?>">
 								<?php echo $row['nama_kub'] ?>
@@ -118,8 +92,7 @@
 						// ambil data dari database
 						$query = "select * from tb_lingkungan where id_lingkungan";
 						$hasil = mysqli_query($koneksi, $query);
-						while ($row = mysqli_fetch_array($hasil))
-						{
+						while ($row = mysqli_fetch_array($hasil)) {
 						?>
 							<option value="<?php echo $row['id_lingkungan'] ?>">
 								<?php echo $row['nama_lingkungan'] ?>
@@ -159,14 +132,35 @@
 					</select>
 				</div>
 			</div>
-
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Status Babtis</label>
+				<div class="col-sm-3">
+					<select name="status_babtis" id="status_babtis" class="form-control" required>
+						<option value="" disabled selected>- Pilih Status Babtis-</option>
+						<option>Sudah Babtis</option>
+						<option>Belum Babtis</option>
+			
+					</select>
+				</div>
+			</div>
+			
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Alamat</label>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" required>
 				</div>
 			</div>
-
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Status Komuni</label>
+				<div class="col-sm-3">
+					<select name="status_komuni" id="status_komuni" class="form-control" required>
+						<option value="" disabled selected>- Pilih Status Komuni-</option>
+						<option>Sudah Komuni</option>
+						<option>Belum Komuni</option>
+					</select>
+				</div>
+			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">RT/RW</label>
 				<div class="col-sm-3">
@@ -218,20 +212,16 @@
 					</select>
 				</div>
 			</div>
-
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Status Perkawinan</label>
+				<label class="col-sm-2 col-form-label">Status Krisma</label>
 				<div class="col-sm-3">
-					<select name="status_kawin" id="status_kawin" class="form-control" required>
-						<option value="" disabled selected>- Pilih Status Perkawinan-</option>
-						<option>Sudah</option>
-						<option>Belum</option>
-						<option>Cerai Mati</option>
-						<option>Cerai Hidup</option>
+					<select name="status_krisma" id="status_krisma" class="form-control" required>
+						<option value="" disabled selected>- Pilih Status Krisma-</option>
+						<option>Sudah Krisma</option>
+						<option>Belum Krisma</option>
 					</select>
 				</div>
 			</div>
-
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Pekerjaan</label>
 				<div class="col-sm-3">
@@ -256,11 +246,22 @@
 						<option>Pengurus Stasi</option>
 						<option>Pengurus Lingkungan</option>
 						<option>Pengurus KUB</option>
-						<option>Umat</option>
+						<option>Umat Biasa</option>
 					</select>
 				</div>
 			</div>
-
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Status Perkawinan</label>
+				<div class="col-sm-3">
+					<select name="status_kawin" id="status_kawin" class="form-control" required>
+						<option value="" disabled selected>- Pilih Status Perkawinan-</option>
+						<option>Sudah</option>
+						<option>Belum</option>
+						<option>Cerai Mati</option>
+						<option>Cerai Hidup</option>
+					</select>
+				</div>
+			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">No. Handphone/WhatsApp</label>
 				<div class="col-sm-6">
@@ -300,33 +301,59 @@
 
 	</div>
 	<div class="card-footer">
-		<input type="submit" name="Simpan" value="Simpan" class="btn btn-info">
-		<a href="?page=data-umat" title="Kembali" class="btn btn-secondary">Batal</a>
+	<div class="col-md-6 offset-md-6">
+		<input type="submit" name="Simpan" value="Simpan" class="btn btn-primary">
+		<a href="?page=data-umat" title="Kembali" class="btn btn-danger">Batal</a>
 	</div>
 	</form>
 </div>
 
+<script src="plugins/jquery/jquery.min.js"></script>
+
+<script>
+	$('#btn_nik').click(function() {
+		var val = $('#nik').val();
+		$.ajax({
+			url: "http://localhost/sigereja/administrator/query.php?q=get_masuk",
+			type: "POST",
+			dataType: "JSON",
+			data: {
+				tbl: 'tb_mutasi_masuk',
+				q: val
+			},
+			success: function(data) {
+				$('#nama_umat').val(data.nama)
+			},
+		});
+	})
+</script>
 
 
 
 
 <?php
 
-if (isset($_POST['Simpan']))
-{
+if (isset($_POST['Simpan'])) {
+	// {"nik":"3510126907080003","nama_umat":"testing","id_kub":"3","id_lingkungan":"8","tempat_lahir":"haha","tanggal_lahir":"2024-01-23","umur":"1","jenis_kelamin":"LK","alamat":"gintagan","rt":"11","rw":"11","kelurahanDesa":"20305","gol_darah":"B","pendidikan":"SD","status_kawin":"Belum","pekerjaan":"Pelajar","jabatan_gereja":"Pengurus Gereja","no_hp":"087857173593","Simpan":"Simpan"}
 	//mulai proses simpan data
-	$sql_simpan = "INSERT INTO tb_umat (id_kub, id_lingkungan, nik, nama_umat, jenis_kelamin, alamat, rt, rw, pekerjaan, jabatan_gereja, pendidikan, gol_darah, no_hp, tempat_lahir, tanggal_lahir, status_kawin, umur, status_umat) VALUES (
+	$sql_simpan = "INSERT INTO tb_umat (id_kub, id_lingkungan,id_kategorial, nik, nama_umat, jenis_kelamin,status_babtis,
+	 alamat, status_komuni, rt, rw, pekerjaan, jabatan_gereja, pendidikan, status_krisma, gol_darah, no_hp, tempat_lahir, 
+	 tanggal_lahir, status_kawin, umur, status_umat) VALUES (
       		'" . $_POST['id_kub'] . "',
       		 '" . $_POST['id_lingkungan'] . "',
+			   '" . $_POST['id_kategorial'] . "',
             '" . $_POST['nik'] . "',
             '" . $_POST['nama_umat'] . "',
 			'" . $_POST['jenis_kelamin'] . "',
+			'" . $_POST['status_babtis'] . "',
 			'" . $_POST['alamat'] . "',
+			'" . $_POST['status_komuni'] . "',
 			'" . $_POST['rt'] . "',
 			'" . $_POST['rw'] . "',
 			'" . $_POST['pekerjaan'] . "',
 			'" . $_POST['jabatan_gereja'] . "',
 			'" . $_POST['pendidikan'] . "',
+			'" . $_POST['status_krisma'] . "',
 			'" . $_POST['gol_darah'] . "',
 			'" . $_POST['no_hp'] . "',
 			'" . $_POST['tempat_lahir'] . "',
@@ -336,53 +363,18 @@ if (isset($_POST['Simpan']))
 
             'Ada')";
 	$query_simpan = mysqli_query($koneksi, $sql_simpan);
+mysqli_close($koneksi);
 
-	if (($_POST['no_kk'] != ""))
-	{
-		// Simpan Data Kartu Keluarga
-		$sql_simpan2 = "INSERT INTO tb_kk (no_kk, kepala_keluarga, alamat, rt, rw, kec, kab, prov, id_kelurahan_desa) VALUES (
-		'" . $_POST['no_kk'] . "',
-		'" . $_POST['nama_umat'] . "',
-		'" . $_POST['alamat'] . "',
-		'" . $_POST['rt'] . "',
-		'" . $_POST['rw'] . "',
-		'" . $_POST['kec'] . "',
-		'" . $_POST['kab'] . "',
-		'" . $_POST['prov'] . "',
-		'" . $_POST['kelurahanDesa'] . "')";
-		$query_simpan2 = mysqli_query($koneksi, $sql_simpan2);
-	}
-	if ($_POST['hubungan'] != "")
-	{
-		$sql = "SELECT MAX(id_umat) FROM TB_UMAT";
-		$sql2 = mysqli_query($koneksi, $sql);
-		$sql2 = mysqli_fetch_assoc($sql2);
-
-		$idUmat = $sql2['MAX(id_umat)'];
-
-		$sql_simpan2 = "INSERT INTO tb_anggota (id_kk, id_umat, hubungan) VALUES( 
-            '" . $_POST['idkk'] . "',
-            '" . $idUmat . "',
-            '" . $_POST['hubungan'] . "')";
-		$query_simpan2 = mysqli_query($koneksi, $sql_simpan2);
-	}
-
-
-	mysqli_close($koneksi);
-
-	if ($query_simpan2)
-	{
+	if ($query_simpan) {
 		echo  "<script>
       Swal.fire({title: 'Tambah Data Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
       }).then((result) => {if (result.value){
           window.location = 'index.php?page=data-umat';
           }
       })</script>";
-	}
-	else
-	{
+	} else {
 		echo "<script>
-      Swal.fire({title: 'Tambah Data Gagal Karena Nomor KK Sudah Ada',text: '',icon: 'error',confirmButtonText: 'OK'
+      Swal.fire({title: 'Tambah Data Gagal ',text: '',icon: 'error',confirmButtonText: 'OK'
       }).then((result) => {if (result.value){
           window.location = 'index.php?page=add-umat';
           }
