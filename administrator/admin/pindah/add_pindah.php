@@ -38,6 +38,7 @@
                     <input type="text" class="form-control" id="nama_umat" name="nama_umat" readonly>
                 </div>
             </div>
+            <!-- nambahin input hidden buat id_kub -->
             <input type="hidden" name="id_kub" id="id_kub" value="">
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Lingkungan Asal</label>
@@ -54,6 +55,7 @@
 
 
 
+            <!-- nambahin input hidden buat id_lingkungan -->
             <input id="id_lingkungan" type="hidden" name="id_lingkungan" value="">
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Lingkungan</label>
@@ -119,6 +121,7 @@
             success: function(data) {
                 $('#nama_umat').val(data.nama_umat)
                 $('#id_kub').val(data.id_kub)
+                // benerin value nama kub & nama lingkungan
                 $('#nama_kub').val(data.nama_kub)
                 $('#nama_lingkungan').val(data.nama_lingkungan)
                 // var kub = new Option(data.nama_kub, data.id_kub, true, true);
