@@ -34,116 +34,47 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nama</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" id="nama_umat" name="nama_umat" placeholder="Nama Umat" readonly>
+					<input type="text" class="form-control" id="nama_umat" name="nama_umat"  readonly>
 				</div>
 			</div>
-			
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">KUB</label>
-				<div class="col-sm-4">
-					<select name="id_kub" id="id_kub" class="form-control select2bs4" required>
-						<option value="" disabled selected>- Pilih KUB -</option>
-						<?php
-						// ambil data dari database
-						$query = "select * from tb_kub where id_kub";
-						$hasil = mysqli_query($koneksi, $query);
-						while ($row = mysqli_fetch_array($hasil)) {
-						?>
-							<option value="<?php echo $row['id_kub'] ?>">
-								<?php echo $row['nama_kub'] ?>
-							</option>
-						<?php
-						}
-						?>
-					</select>
-				</div>
-			</div>
-
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Lingkungan</label>
-				<div class="col-sm-4">
-					<select name="id_lingkungan" id="id_lingkungan" class="form-control select2bs4" required>
-						<option value="" disabled selected>- Pilih Lingkungan -</option>
-						<?php
-						// ambil data dari database
-						$query = "select * from tb_lingkungan where id_lingkungan";
-						$hasil = mysqli_query($koneksi, $query);
-						while ($row = mysqli_fetch_array($hasil)) {
-						?>
-							<option value="<?php echo $row['id_lingkungan'] ?>">
-								<?php echo $row['nama_lingkungan'] ?>
-							</option>
-						<?php
-						}
-						?>
-					</select>
-				</div>
-			</div>
+			    <!-- nambahin input hidden buat id_kub -->
+				<input type="hidden" name="id_kub" id="id_kub" value="">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Lingkungan Asal</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="nama_lingkungan" name="nama_lingkungan" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">KUB Asal</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="nama_kub" name="nama_kub" readonly>
+                </div>
+            </div>
 
 		
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Tujuan Paroki</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control" id="tujuan_paroki" name="tujuan_paroki" placeholder="Tujuan Gereja Paroki" required>
+					<input type="text" class="form-control" id="tujuan_paroki" name="tujuan_paroki" placeholder="Gereja Paroki" required>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label"> Tujuan Keuskupan</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="keuskupan" name="keuskupan" placeholder="Keuskupan" required>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Provinsi</label>
-				<div class="col-sm-4">
-					<select name="provinsi" id="provinsi" class="form-control" >
-						<option value="" disabled selected>- Provinsi -</option>
-						<?php
-						// ambil data dari database
-						
-						$query = "SELECT id_provinsi, nama_provinsi FROM tbl_provinsi";
-						$hasil = mysqli_query($koneksi, $query);
-
-						// echo $hasil;
-						while ($row = mysqli_fetch_array($hasil)) {
-						?>
-						<?php $prov = $row['id_provinsi']; ?>
-							<option value="<?php echo $row['nama_provinsi'] ?> ">
-								
-								<?php echo $row['nama_provinsi'] ?>
-							</option>
-						<?php
-						}
-						?>
+				<label class="col-sm-2 col-form-label">Alasan keluar</label>
+				<div class="col-sm-3">
+					<select name="alasan_pindah" id="alasan_pindah" class="form-control" required>
+						<option value="" disabled selected>- Pilih Alasan Keluar-</option>
+						<option>Dominisili</option>
+						<option>Pemindahan</option>
+						<option>Alasan lainnya</option>
 					</select>
-				</div>
-			</div>
-
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Kabupaten</label>
-				<div class="col-sm-4">
-					<select name="kabupaten" id="kabupaten" class="form-control" >
-						<option value="" disabled selected>- Kabupaten -</option>
-						<?php
-						// ambil data dari database
-						// if(isset($_GET['id_provinsi'])){						
-							$prov = $_GET['id_provinsi'];
-							$query = "SELECT nama_kota_kabupaten FROM tbl_kota_kabupupaten";
-						// }
-						
-						$hasil = mysqli_query($koneksi, $query);
-						while ($row = mysqli_fetch_array($hasil)) {
-						?>
-							<option value="<?php echo $row['nama_kota_kabupaten'] ?> ">
-								<?php echo $row['nama_kota_kabupaten'] ?>
-							</option>
-						<?php
-						}
-						?>
-					</select>
-				</div>
-			</div>
-		
-		
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Alasan Keluar</label>
-				<div class="col-sm-4">
-					<!-- <input type="text" class="form-control" id="alasan_pindah" name="alasan_pindah" placeholder="alasan_pindah" required> -->
-					<textarea name="alasan_pindah" class="form-control" required id="alasan_pindah" cols="30" rows="5"></textarea>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -183,10 +114,24 @@
 				// $('#id_lingkungan').val(data.id_lingkungan)
 
 			},
+			success: function(data) {
+                $('#nama_umat').val(data.nama_umat)
+                $('#id_kub').val(data.id_kub)
+                // benerin value nama kub & nama lingkungan
+                $('#nama_kub').val(data.nama_kub)
+                $('#nama_lingkungan').val(data.nama_lingkungan)
+                // var kub = new Option(data.nama_kub, data.id_kub, true, true);
+                // $('#nama_kub').append(kub).trigger('change');
+                // var lingkungan = new Option(data.nama_lingkungan, data.id_lingkungan, true, true);
+                // $('#nama_lingkungan').append(lingkungan).trigger('change');
+                $('#id_lingkungan').val(data.id_lingkungan)
+
+            },
+        });
 		});
 		// ambil data dari database
 		// $query_simpan = mysqli_query($koneksi, $sql_simpan);
-	})
+	
 </script>
 
 
@@ -201,14 +146,12 @@ if (isset($_POST['Simpan'])) {
 	$id_kub = $_POST['id_kub'];
 	$id_lingkungan = $_POST['id_lingkungan'];
 	$tujuan_paroki = $_POST['tujuan_paroki'];
-	$provinsi = $_POST['provinsi'];
-	$kabupaten = $_POST['kabupaten'];
-	$kecamatan = $_POST['kecamatan'];
+	$keuskupan = $_POST['keuskupan'];
 	$alasan_pindah = $_POST['alasan_pindah'];
 	$tgl_pindah = $_POST['tgl_pindah'];
 
 	//mulai proses simpan data
-	$sql_simpan = "INSERT INTO tb_mutasi_keluar set nik='$nik', nama='$nama_umat',id_lingkungan='$id_lingkungan', id_kub='$id_kub',  tujuan_paroki='$tujuan_paroki', provinsi='$provinsi', kabupaten='$kabupaten', kecamatan ='$kecamatan', alasan_keluar='$alasan_pindah', tgl_keluar='$tgl_pindah'";
+	$sql_simpan = "INSERT INTO tb_mutasi_keluar set nik='$nik', nama='$nama_umat',id_lingkungan='$id_lingkungan', id_kub='$id_kub',  tujuan_paroki='$tujuan_paroki', keuskupan='$keuskupan',  alasan_keluar='$alasan_pindah', tgl_keluar='$tgl_pindah'";
 	$query_simpan = mysqli_query($koneksi, $sql_simpan);
  
 	$sql_hapus = "DELETE FROM tb_umat where nik='$nik'";

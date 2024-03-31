@@ -15,19 +15,36 @@ if (isset($_GET['kode'])) {
 	</div>
 	<form action="" method="post" enctype="multipart/form-data">
 		<div class="card-body">
-
+		<form action="" method="post" enctype="multipart/form-data">
+		<div class="card-body">
 		<div class="form-group row">
 				<label class="col-sm-2 col-form-label">NIK</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" id="f_nik" name="f_nik" placeholder="NIK" value="<?php echo $data_cek['nik'] ?>" readonly>
+					<!-- <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK" required> -->
+					<select name="f_nik" id="f_nik" class="form-control select2bs4" required>
+						<option value="" disabled selected>- Pilih NIK -</option>
+						<?php
+						// ambil data dari database
+						$query = "select * from tb_umat where nik";
+						$hasil = mysqli_query($koneksi, $query);
+						while ($row = mysqli_fetch_array($hasil)) {
+						?>
+							<option value="<?php echo $row['id_umat'] ?>" <?php echo $row['id_umat'] == $data_cek['nik'] ? "selected" : "" ?>>
+								<?php echo $row['nik'] ?>
+							</option>
+						<?php
+						}
+						?>
+					</select>
+				</div>
+				<div class="col-sm-2">
+					<button id="btn_nik" class="btn btn-info" type="button"> Cari</button>
 				</div>
 			</div>
-
-
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nama</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" value="<?php echo $data_cek['nama'] ?>" id="nama_umat" name="nama_umat" placeholder="Nama Umat" readonly>
+					<input type="text" class="form-control" value="<?php echo $data_cek['nama'] ?>" id="nama_umat" name="nama_umat" readonly>
 				</div>
 			</div>
 
@@ -79,39 +96,33 @@ if (isset($_GET['kode'])) {
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Provinsi</label>
+				<label class="col-sm-2 col-form-label">Keuskupan</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control"  value="<?php echo $data_cek['provinsi'] ?>" id="provinsi" name="provinsi" placeholder="Provinsi" required>
+					<input type="text" class="form-control"  value="<?php echo $data_cek['keuskupan'] ?>" id="keuskupan" name="keuskupan" placeholder="Keuskupan" required>
 				</div>
 			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Alasan Keluar</label>
+				<div class="col-sm-3">
+					<select name="alasan_pindah" id="alasan_pindah" class="form-control">
+						<option value="" disabled selected>- Pilih Alasan keluar -</option>
+						<?php
+						//menhecek data yg dipilih sebelumnya
+						if ($data_cek['alasan_keluar'] == "Dominisili") echo "<option value='Dominisili' selected>Dominisili</option>";
+						else echo "<option value='Dominisili'>Dominisili</option>";
 
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Kabupaten</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="kabupaten"  value="<?php echo $data_cek['kabupaten'] ?>" name="kabupaten" placeholder="Kabupaten" required>
-				</div>
-			</div>
+						if ($data_cek['alasan_keluar'] == "Pemindahan") echo "<option value='Pindah' selected>Pindah</option>";
+						else echo "<option value='Pemindahan'>Pemindahan</option>";
 
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Kecamatan</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="kecamatan"  value="<?php echo $data_cek['kecamatan'] ?>" name="kecamatan" placeholder="Kecamatan" required>
-				</div>
-			</div>
+						if ($data_cek['alasan_keluar'] == "Alasan lainnya") echo "<option value='Alasan lainnya' selected>PAlasan lainnya</option>";
+						else echo "<option value='Alasan lainnya'>Alasan lainnya</option>";
 
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Kelurahan</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="kelurahan"  value="<?php echo $data_cek['kelurahan'] ?>" name="kelurahan" placeholder="Kelurahan" required>
+						
+						?>
+					</select>
 				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Alasan Pindah</label>
-				<div class="col-sm-4">
-					<!-- <input type="text" class="form-control" id="alasan_pindah" name="alasan_pindah" placeholder="alasan_pindah" required> -->
-					<textarea name="alasan_pindah" class="form-control"  required id="alasan_pindah" cols="30" rows="5"><?php echo $data_cek['alasan_keluar'] ?></textarea>
-				</div>
-			</div>
+					</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Tanggal Keluar</label>
 				<div class="col-sm-4">
